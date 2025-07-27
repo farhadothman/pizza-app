@@ -1,4 +1,4 @@
- import { useState } from "react";
+  import { useState } from "react";
 import backgroundImage from "./assets/background.webp";
 
 export default function App() {
@@ -28,7 +28,7 @@ export default function App() {
     { id: 106, name: "BBQ Burgare", price: 110, ingredients: "Nötkött, BBQ-sås, ost, bacon, lök" },
   ];
 
-  const drinks = [
+  const coldDrinks = [
     { id: 201, name: "Coca-Cola", price: 25, ingredients: "Kolsyrat vatten, socker, färgämne, koffein" },
     { id: 202, name: "Fanta", price: 25, ingredients: "Kolsyrat vatten, socker, apelsinarom" },
     { id: 203, name: "Sprite", price: 25, ingredients: "Kolsyrat vatten, socker, citron- och limearom" },
@@ -38,6 +38,40 @@ export default function App() {
     { id: 207, name: "Apelsinjuice", price: 30, ingredients: "100% apelsinjuice" },
     { id: 208, name: "Äppeljuice", price: 30, ingredients: "100% äppeljuice" },
     { id: 209, name: "Kaffe", price: 20, ingredients: "Bryggkaffe, vatten" },
+  ];
+
+  const hotDrinks = [
+    { id: 301, name: "Bryggkaffe", price: 20, ingredients: "Kaffe, vatten" },
+    { id: 302, name: "Espresso", price: 25, ingredients: "Starkt kaffe" },
+    { id: 303, name: "Cappuccino", price: 30, ingredients: "Espresso, mjölkskum" },
+    { id: 304, name: "Latte", price: 35, ingredients: "Espresso, varm mjölk" },
+    { id: 305, name: "Te (Svart)", price: 20, ingredients: "Svart te" },
+    { id: 306, name: "Te (Grönt)", price: 20, ingredients: "Grönt te" },
+    { id: 307, name: "Chailatte", price: 35, ingredients: "Kryddat te, mjölk" },
+    { id: 308, name: "Varm choklad", price: 30, ingredients: "Mjölk, kakao, socker" },
+    { id: 309, name: "Macchiato", price: 30, ingredients: "Espresso, lite mjölk" },
+    { id: 310, name: "Dubbel Espresso", price: 30, ingredients: "Dubbel mängd espresso" },
+  ];
+
+  const desserts = [
+    { id: 401, name: "Tiramisu", price: 50, ingredients: "Mascarpone, kaffe, kakao" },
+    { id: 402, name: "Chokladfondant", price: 55, ingredients: "Mörk choklad, smör, ägg" },
+    { id: 403, name: "Pannacotta", price: 50, ingredients: "Grädde, vanilj, gelatin" },
+    { id: 404, name: "Crème Brûlée", price: 60, ingredients: "Grädde, äggula, vanilj" },
+    { id: 405, name: "Glass med bär", price: 45, ingredients: "Vaniljglass, färska bär" },
+    { id: 406, name: "Äppelpaj", price: 50, ingredients: "Äpple, smuldeg, kanel" },
+    { id: 407, name: "Chokladmousse", price: 50, ingredients: "Choklad, grädde" },
+    { id: 408, name: "Citronpaj", price: 50, ingredients: "Citron, ägg, pajskal" },
+    { id: 409, name: "Jordgubbstårta", price: 55, ingredients: "Tårtbotten, grädde, jordgubbar" },
+    { id: 410, name: "Banoffeepaj", price: 55, ingredients: "Banan, kola, grädde" },
+  ];
+
+  const offers = [
+    { id: 501, name: "Pizza + Liten dryck", price: 95, ingredients: "Valfri pizza + 33cl dryck" },
+    { id: 502, name: "Hamburgare + Pommes", price: 90, ingredients: "Valfri hamburgare + pommes" },
+    { id: 503, name: "2 pizzor + 2 drycker", price: 180, ingredients: "Två valfria pizzor + två 33cl drycker" },
+    { id: 504, name: "Familjepaket", price: 250, ingredients: "2 pizzor, 2 hamburgare, 4 drycker" },
+    { id: 505, name: "Efterrättspaket", price: 80, ingredients: "Valfri dessert + kaffe" },
   ];
 
   const addToCart = (item, type) => {
@@ -102,15 +136,16 @@ export default function App() {
 
         {showMenu && (
           <div style={{ textAlign: "center", marginBottom: 20 }}>
-            <button onClick={() => setSelectedCategory("pizza")} style={subButtonStyle}>
-              🍕 Pizzor
-            </button>
-            <button onClick={() => setSelectedCategory("burger")} style={subButtonStyle}>
-              🍔 Hamburgare
-            </button>
-            <button onClick={() => setSelectedCategory("drink")} style={subButtonStyle}>
-              🥤 Drycker
-            </button>
+            <div>
+              <button onClick={() => setSelectedCategory("pizza")} style={subButtonStyle}>🍕 Pizzor</button>
+              <button onClick={() => setSelectedCategory("burger")} style={subButtonStyle}>🍔 Hamburgare</button>
+              <button onClick={() => setSelectedCategory("coldDrink")} style={subButtonStyle}>🥤 Kalla Drycker</button>
+              <button onClick={() => setSelectedCategory("hotDrink")} style={subButtonStyle}>☕ Varma Drycker</button>
+              <button onClick={() => setSelectedCategory("dessert")} style={subButtonStyle}>🍰 Efterrätter</button>
+            </div>
+            <div style={{ marginTop: "10px" }}>
+              <button onClick={() => setSelectedCategory("offer")} style={subButtonStyle}>🎁 Erbjudanden</button>
+            </div>
           </div>
         )}
 
@@ -128,10 +163,31 @@ export default function App() {
           </>
         )}
 
-        {selectedCategory === "drink" && (
+        {selectedCategory === "coldDrink" && (
           <>
-            <h2 style={sectionHeaderStyle}>🥤 Drycker</h2>
-            {renderItems(drinks, "drink", "purple")}
+            <h2 style={sectionHeaderStyle}>🥤 Kalla Drycker</h2>
+            {renderItems(coldDrinks, "coldDrink", "purple")}
+          </>
+        )}
+
+        {selectedCategory === "hotDrink" && (
+          <>
+            <h2 style={sectionHeaderStyle}>☕ Varma Drycker</h2>
+            {renderItems(hotDrinks, "hotDrink", "brown")}
+          </>
+        )}
+
+        {selectedCategory === "dessert" && (
+          <>
+            <h2 style={sectionHeaderStyle}>🍰 Efterrätter</h2>
+            {renderItems(desserts, "dessert", "darkred")}
+          </>
+        )}
+
+        {selectedCategory === "offer" && (
+          <>
+            <h2 style={sectionHeaderStyle}>🎁 Erbjudanden</h2>
+            {renderItems(offers, "offer", "#ff5722")}
           </>
         )}
 
@@ -188,7 +244,7 @@ const subButtonStyle = {
   backgroundColor: "#ffa726",
   color: "white",
   padding: "10px 16px",
-  margin: "0 6px",
+  margin: "4px 6px",
   border: "none",
   borderRadius: "5px",
   fontSize: "14px",
@@ -222,4 +278,3 @@ const actionButton = (bg) => ({
   marginTop: "10px",
   cursor: "pointer",
 });
- 
